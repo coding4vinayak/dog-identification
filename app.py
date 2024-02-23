@@ -1,5 +1,4 @@
 # app.py
-
 import numpy as np
 from flask import Flask, render_template, request
 from tensorflow.keras.preprocessing import image
