@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Image Classification</title>
+</head>
+<body>
+    <h1>Image Classification</h1>
+    <form action="/classify" method="post" enctype="multipart/form-data">
+        <input type="file" name="image" accept="image/*">
+        <button type="submit">Classify Image</button>
+    </form>
+    <br>
+    <div id="results"></div>
+
+    <script>
+        // Display classification results
+        function displayResults(results) {
+            var resultsDiv = document.getElementById('results');
+            resultsDiv.innerHTML = '<h2>Classification Results</h2>';
+            var predictions = results.predictions;
+            predictions.forEach(function(prediction) {
+                var label = prediction.label;
+                var confidence = prediction.confidence;
+                var p = document.createElement('p');
+                p.textContent = label + ': ' + confidence;
+                resultsDiv.appendChild(p);
+            });
+        }
+
+        // Handle form submission
+        document.querySelector('form').addEventListener('submit', function(event) {
+            event.preventDefault();
+            var formData = new FormData(this);
+            fetch('/classify', {
+                method: 'POST',
+                body: formData
+            })
+            .then(response => response.json())
+            .then(data => displayResults(data));
+        });
+    </script>
+</body>
+</html>
