@@ -1,5 +1,6 @@
 numpy
 flask
-tensorflow>=2.5.0
+tensorflow
 keras
 gunicorn
+pillow

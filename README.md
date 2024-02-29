@@ -1,2 +1,2 @@
 # dog-identification
-dog id 
+know your dog;s breed 
